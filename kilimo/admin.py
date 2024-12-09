@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer, Product, Order, Pricing, Slider, Services, Details, Recent, Post, Testimonials, Test, Json, Icon, Moon, About, New, Section, Excel,Cart, Events, Feedback, Discount, Author, Profile, Main, Support, List, List_desc, Pixel,Php, Comment, Shop, Employee, Update, Apply, Special, Alx, Redeem, User
+from .models import Customer, Product, Order, Pricing, Slider, Services, Details, Recent, Post, Testimonials, Test, Json, Icon, Moon, About, New, Section, Excel,Cart, Events, Feedback, Discount, Author, Profile, Main, Support, List, List_desc, Pixel,Php, Comment, Shop, Employee, Update, Apply, Special, Alx, Redeem, User, Contact, Hours, Our
 
 admin.site.register(Customer)
 admin.site.register(Product)
@@ -45,12 +45,18 @@ admin.site.register(Support)
 admin.site.register(List)
 admin.site.register(List_desc)
 admin.site.register(Alx)
+admin.site.register(Hours)
+admin.site.register(Our)
 
 
 #BLOG SECTION.
 admin.site.register(Pixel)
 admin.site.register(Redeem)
 
+
 #CONTACT SECTION
 admin.site.register(User)
+admin.site.register(Contact)
+
+
 

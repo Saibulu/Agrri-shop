@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Product  # Ensure you have a Product model defined
+from .models import Product # Ensure you have a Product model defined
 
 # User Registration Form
 class CreateUserForm(UserCreationForm):
@@ -22,4 +22,3 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['prod_name', 'prod_price', 'prod_category', 'prod_qty', 'prod_img', 'prod_desc']
-

@@ -20,7 +20,6 @@ class Product(models.Model):
     prod_img = models.ImageField(upload_to='products/', blank=True, null=True)
     prod_desc = models.TextField()
 
-
     def __str__(self):
         return self.prod_name
 
@@ -64,7 +63,6 @@ class Services(models.Model):
 
     def __str__(self):
         return self.service_name
-
 
 class Details(models.Model):
     detail_title = models.CharField(max_length=100)
@@ -128,7 +126,6 @@ class Moon(models.Model):
 
     def __str__(self):
         return self.moon_title
-
 
 class About(models.Model):
     about_title = models.CharField(max_length=100)
@@ -241,6 +238,8 @@ class List_desc(models.Model):
 class Pixel(models.Model):
     pixel_title = models.CharField(max_length=100)
     pixel_desc = models.TextField()
+    # month = models.CharField(max_length=100, default='none')
+    date = models.DateField(default='2024-07-08')
     pixel_image = models.ImageField(upload_to='pixels/', default='default_image.jpg')
 
     def __str__(self):
@@ -310,7 +309,6 @@ class Redeem(models.Model):
     redeem_title = models.CharField(max_length=100)
     redeem_head = models.CharField(max_length=100)
 
-
     def __str__(self):
         return self.redeem_title
 
@@ -325,8 +323,39 @@ class Task(models.Model):
     title = models.CharField(max_length=100)
     completed = models.BooleanField(default=False)
 
-def __str__(self):
-    return self.title
+    def __str__(self):
+        return self.title
+
+
+# CONTACT SECTION
+class Contact(models.Model):
+    contact_name = models.CharField(max_length=100)
+    contact_email = models.EmailField(max_length=100)
+    contact_phone = models.IntegerField()
+    contact_message = models.TextField()
+
+    def __str__(self):
+        return self.contact_name
+
+class Hours(models.Model):
+    hours_title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.hours_title
+
+class Our(models.Model):
+    our_list =models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.our_list
+
+
+
+
+
+
+
+
 
 
 

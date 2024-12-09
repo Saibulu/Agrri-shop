@@ -5,17 +5,16 @@ from .forms import CreateUserForm
 from rest_framework import viewsets
 from . models import Task
 from .forms import ProductForm
+from django.contrib import messages
 from .models import Product
 from .serializers import TaskSerializer
-from django.contrib import messages
 from .serializers import ProductSerializer, PricingSerializer, CustomerSerializer, TaskSerializer
 
 from .models import Product, Pricing, Customer, Slider, Services, Details, Recent, Post, Testimonials, Test, Json, Icon, \
     Moon, About, New, Section, Excel, Cart, Events, Feedback, Discount, Author, Profile, Main, Support, List, List_desc, \
-    Pixel, Php, Comment, Shop, Employee, Update, Apply, Special, Alx, Redeem, User, Order
+    Pixel, Php, Comment, Shop, Employee, Update, Apply, Special, Alx, Redeem, User, Order, Contact, Hours, Our
 
 #  CRUD.
-
 # View all products
 def view_products(request):
     products = Product.objects.all()
@@ -32,27 +31,21 @@ def add_product(request):
         form = ProductForm()
     return render(request, 'add_product.html', {'form': form})
 
-
-from django.shortcuts import render, redirect
-from .models import Product
-from .forms import ProductForm  # If using forms (recommended)
-
 # View to add a new product
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()  # Save the product to the database
-            return redirect('view_products')  # Redirect to the view products page after adding
+            form.save()
+            return redirect('view_products')
     else:
-        form = ProductForm()  # Display an empty form for GET request
+        form = ProductForm()
 
     return render(request, 'add_product.html', {'form': form})
 
-
 # View to edit a product
 def edit_product(request, id):
-    product = get_object_or_404(Product, id=id)  # Fetch the product by ID
+    product = get_object_or_404(Product, id=id)
 
     if request.method == 'POST':
         # Update the product from the submitted form data
@@ -66,11 +59,10 @@ def edit_product(request, id):
         if request.FILES.get('prod_img'):
             product.prod_img = request.FILES['prod_img']
 
-        product.save()  # Save the updated product to the database
-        return redirect('view_products')  # Redirect to the view products page after saving
+        product.save()
+        return redirect('view_products')
 
     return render(request, 'edit_product.html', {'product': product})
-
 
 # Delete product
 def delete_product(request, id):
@@ -81,7 +73,6 @@ def delete_product(request, id):
     return render(request, 'delete_product.html', {'product': product})
 #ENDCRUD
 
-
 def subscribe(request):
     if request.method == "POST":
         email = request.POST.get('email')
@@ -91,20 +82,19 @@ def subscribe(request):
 
 #DROPDOWN
 def fertilizers(request):
-    return render(request, 'kilimo/fertilizers.html')
+    return render(request, 'fertilizers.html')
 
 def farming_tools(request):
-    return render(request, 'kilimo/farming_tools.html')
+    return render(request, 'farming_tools.html')
 
 def pesticides(request):
-    return render(request, 'kilimo/pesticides.html')
+    return render(request, 'pesticides.html')
 
 def irrigation_equipments(request):
-    return render(request, 'kilimo/irrigation_equipments.html')
+    return render(request, 'irrigation_equipments.html')
 
 def livestock_supply(request):
-    return render(request, 'kilimo/livestock_supply.html')
-
+    return render(request, 'livestock_supply.html')
 #ENDDROPDOWN
 
 # ViewSets
@@ -198,23 +188,19 @@ def insert_data(request):
 
     return render(request, 'insert.html')
 
+
 def blog(request):
-    redeem = Redeem.objects.all()
+    redeem = Redeem.objects.first()
     pixel =Pixel.objects.all()
     context = {
         'redeem': redeem,
         'pixel': pixel,
+
     }
     return render(request, 'blog.html', context)
 
-# kilimo/views.py
-from django.shortcuts import render
-
-
-# Other imports...
 
 def about(request):
-    # Ensure this function is defined
     apply = Apply.objects.first()
     discount = Discount.objects.all()
     feedback = Feedback.objects.first()
@@ -235,16 +221,19 @@ def about(request):
 
     return render(request, 'about.html', context)
 
-
 def contact(request):
-    user: User.objects.first()
-    context ={
-        'user': user,
+    if request.method ==  'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
 
-    }
+        contact= Contact(contact_name =name, contact_email=email, contact_phone=phone, contact_message=message)
+        contact.save()
+        messages.success(request, 'your message had been submitted successfully')
+        return redirect('/contact/')
 
     return render(request, 'contact.html')
-
 
 def services(request):
     special = Special.objects.first()
@@ -262,18 +251,28 @@ def services(request):
         'php': php,
         'author': author,
         'profile': profile,
-
     }
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        desc = request.POST.get('desc')
+        Services.save()
+
+        services = Services(service_name =name, service_desc =desc)
+        messages.success(request, 'your message had been submitted successfully')
+        return redirect('/contact/')
     return render(request, 'services.html', context)
 
-
 def customers(request):
+    our =Our.objects.all()
+    hours =Hours.objects.first()
     alx =Alx.objects.first()
     list_desc = List_desc.objects.all()
     list = List.objects.first()
     support =Support.objects.first()
     main = Main.objects.first()
     context ={
+        'our': our,
+        'hours':hours,
         'alx': alx,
         'list_desc': list_desc,
         'support': support,
@@ -283,26 +282,20 @@ def customers(request):
     return render(request, 'customers.html', context)
 
 def blog_details(request):
-    # Add relevant context for the blog details page if necessary
     return render(request, 'blog-details.html')
 
-
 def layout(request):
-    # Add your layout page data if needed
     return render(request, 'layout.html')
 
-
 def insert(request):
-    # Insert page logic if needed
     return render(request, 'insert.html')
-
 
 def newsletter_subscription(request):
     if request.method == 'POST':
         email = request.POST.get('email')
+        message = request.POST.get('message')
         return JsonResponse({'message': 'Subscription successful!'})
     return JsonResponse({'error': 'Invalid request'}, status=400)
-
 
 def search_results(request):
     query = request.GET.get('q')

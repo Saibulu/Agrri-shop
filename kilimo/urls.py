@@ -18,6 +18,8 @@ urlpatterns = [
 
     # Other Views
     path('', views.home, name='home'),
+    path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
     path('subscribe/', views.subscribe, name='subscribe'),
     path('blog/', views.blog, name='blog'),
     path('about/', views.about, name='about'),

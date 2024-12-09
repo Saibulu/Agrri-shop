@@ -23,65 +23,97 @@
 
   <!-- Main CSS File -->
   <link href="{% static 'css/main.css' %}" rel="stylesheet">
-<header id="header" class="header d-flex align-items-center position-relative">
-  <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-    <a href="/" class="logo d-flex align-items-center">
-      <img src="{% static 'img/xl.jpg' %}" alt="AgriCulture" width="100">
-    </a>
+  <style>
+    /* Custom Navbar Style */
+    .welcome-navbar {
+      background-color: ;
+      color: #ff7248;
+      font-size: 30px;
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
 
-    <nav id="navmenu" class="navmenu d-flex align-items-center">
-      <ul>
-        <li><a href="{% url 'home' %}" class="active">Home</a></li>
-        <li><a href="{% url 'about' %}">About Us</a></li>
-        <li><a href="{% url 'services' %}">Our Services</a></li>
-        <li><a href="{% url 'blog' %}">Blog</a></li>
-        <li><a href="{% url 'customers' %}">customer Support</a></li>
-        <li class="dropdown"><a href="#"><span>Products</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul class="dropdown-menu" aria-labelledby="productsDropdown">
-            <li><a class="dropdown-item" href="{% url 'fertilizers' %}">Fertilizers</a></li>
-            <li><a class="dropdown-item" href="{% url 'farming_tools' %}">Farming Tools</a></li>
-            <li><a class="dropdown-item" href="{% url 'pesticides' %}">Pesticides</a></li>
-            <li><a class="dropdown-item" href="{% url 'irrigation_equipments' %}">Irrigation Equipment</a></li>
-            <li><a class="dropdown-item" href="{% url 'livestock_supply' %}">Livestock Supply</a></li>
-          </ul>
+    /* Full Width Search Bar */
+    .search-bar {
+      width: 80%;
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      padding: 5px;
+    }
 
-        </li>
-        <li><a href="/">Contact</a></li>
-      </ul>
-      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-    </nav>
+    .search-bar input {
+      width: 60%; /* Full width, adjust as necessary */
+    }
+
+    .search-bar button {
+      width: 40%;
+    }
+  </style>
+</head>
+
+<body class="index-page">
+  <header id="header" class="header d-flex align-items-center position-relative bg-success">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <!-- Welcome Navbar (Blue) -->
+      <div class="welcome-navbar">
+        Welcome To agri_shop
+      </div>
+
+      <nav id="navmenu" class="navmenu d-flex align-items-center ">
+        <ul>
+          <li><a href="{% url 'home' %}" class="active text-warning">Home</a></li>
+          <li><a href="{% url 'about' %}" class="active text-warning">About Us</a></li>
+          <li><a href="{% url 'services' %}"class="active text-warning">Our Services</a></li>
+          <li><a href="{% url 'blog' %}" class="active text-warning">Blog</a></li>
+          <li><a href="{% url 'customers' %}" class="active text-warning">Customer Support</a></li>
+          <li class="dropdown"><a href="#" class="active text-warning"><span>Products</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul class="dropdown-menu bg-info"  aria-labelledby="productsDropdown">
+              <li><a class="dropdown-item" href="{% url 'fertilizers' %}">Fertilizers</a></li>
+              <li><a class="dropdown-item" href="{% url 'farming_tools' %}">Farming Tools</a></li>
+              <li><a class="dropdown-item" href="{% url 'pesticides' %}">Pesticides</a></li>
+              <li><a class="dropdown-item" href="{% url 'irrigation_equipments' %}">Irrigation Equipment</a></li>
+              <li><a class="dropdown-item" href="{% url 'livestock_supply' %}">Livestock Supply</a></li>
+            </ul>
+          </li>
+          <li><a href="{% url 'contact' %}" class="active text-warning">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
 
     <!-- Search Bar -->
     <form class="search-bar d-flex" action="{% url 'search_results' %}" method="get">
-      <input type="text" class="form-control" name="q" placeholder="Search..." aria-label="Search">
-      <button type="submit" class="btn btn-outline-success"><i class="bi bi-search"></i></button>
+      <input type="text" class="form-control " name="q" placeholder="Search..." aria-label="Search">
+      <button type="submit" class="btn btn-outline-success bg-light"><i class="bi bi-search"></i></button>
     </form>
-  </div>
-</header>
+  </header>
 
-{% block body %}
+  {% block body %}
+  {% endblock %}
 
-{% endblock %}
-
-<footer id="footer" class="footer dark-background">
+  <footer id="footer" class="footer bg-dark">
     <div class="footer-top">
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-4 col-md-6 footer-about">
+      <div class="container bg-danger">
+        <div class="row gy-4 ">
+          <div class="col-lg-4 col-md-6 footer-about bg-success">
             <a href="/" class="logo d-flex align-items-center">
-              <span class="sitename">AgriCulture</span>
+              <span class="sitename text-light">AgriCulture</span>
             </a>
-            <div class="footer-contact pt-3">
+            <div class="footer-contact pt-3 ql-bg-danger">
               <p>Green_growers garden Street</p>
-              <p>westlands , kenya</p>
+              <p>westlands, kenya</p>
               <p class="mt-3"><strong>Phone:</strong> <span>+254 727 409 118</span></p>
               <p><strong>Email:</strong> <span>kilimobora148@gmail.com</span></p>
             </div>
           </div>
 
-          <div class="col-lg-2 col-md-3 footer-links">
-            <h4>Useful Links</h4>
+          <div class="col-lg-2 col-md-3 footer-links bg-success">
+            <h4 class="text-light">Useful Links</h4>
             <ul>
               <li><a href="#">Home</a></li>
               <li><a href="#">About us</a></li>
@@ -91,19 +123,19 @@
             </ul>
           </div>
 
-          <div class="col-lg-2 col-md-3 footer-links">
-            <h4>Our Services</h4>
+          <div class="col-lg-2 col-md-3 footer-links bg-success">
+            <h4 class="text-light">Our Services</h4>
             <ul>
               <li><a href="#">Online Ordering</a></li>
               <li><a href="#">Delivery Services</a></li>
-              <li><a href="#">Farming Cunsultations</a></li>
+              <li><a href="#">Farming Consultations</a></li>
               <li><a href="#">Soil testing Services</a></li>
               <li><a href="#">Training Workshop</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-2 col-md-3 footer-links">
-            <h4>Terms of Services</h4>
+          <div class="col-lg-2 col-md-3 footer-links bg-success">
+            <h4 class="text-light">Terms of Services</h4>
             <ul>
               <li><a href="#">Eligibility</a></li>
               <li><a href="#">Account Usage</a></li>
@@ -113,8 +145,8 @@
             </ul>
           </div>
 
-          <div class="col-lg-2 col-md-3 footer-links">
-            <h4>Privacy Policy</h4>
+          <div class="col-lg-2 col-md-3 footer-links bg-success">
+            <h4 class="text-light">Privacy Policy</h4>
             <ul>
               <li><a href="#">Data Collection</a></li>
               <li><a href="#">Data Usage</a></li>
@@ -130,13 +162,12 @@
 
     <div class="copyright text-center">
       <div class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
         <div class="d-flex flex-column align-items-center align-items-lg-start">
           <div>
             © Copyright <strong><span>@Kilimobora</span></strong>. All Rights Reserved
           </div>
-          <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">Agri_Developers</a>
+          <div class="credits bg-dark">
+            Designed by <a href="https://kilimobora.com/">Agri_Developers</a>
           </div>
         </div>
 
@@ -146,14 +177,11 @@
           <a href=""><i class="bi bi-instagram"></i></a>
           <a href=""><i class="bi bi-linkedin"></i></a>
         </div>
-
       </div>
     </div>
-
   </footer>
 
-<body class="index-page">
- <!-- Scroll Top -->
+  <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
@@ -161,17 +189,15 @@
 
   <!-- Vendor JS Files -->
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
   <script src="{% static 'vendor/aos/aos.js' %}"></script>
   <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="x"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
 
   <!-- Main JS File -->
   <script src="{% static 'js/main.js' %}"></script>
 
 </body>
-
-{#jinja Templating#}
-
 </html>
+
+
 
